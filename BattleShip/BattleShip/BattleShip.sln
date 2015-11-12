@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleShip", "BattleShip\BattleShip.csproj", "{4C1747F3-0A8E-4D70-A490-4A185C1EC721}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serveur", "Serveur\Serveur.csproj", "{9DA7CC49-F90E-469F-8A91-95BC8B3D7AC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C1747F3-0A8E-4D70-A490-4A185C1EC721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C1747F3-0A8E-4D70-A490-4A185C1EC721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C1747F3-0A8E-4D70-A490-4A185C1EC721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C1747F3-0A8E-4D70-A490-4A185C1EC721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DA7CC49-F90E-469F-8A91-95BC8B3D7AC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DA7CC49-F90E-469F-8A91-95BC8B3D7AC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DA7CC49-F90E-469F-8A91-95BC8B3D7AC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DA7CC49-F90E-469F-8A91-95BC8B3D7AC7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
