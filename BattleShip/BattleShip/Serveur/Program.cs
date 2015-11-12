@@ -21,10 +21,17 @@ namespace Serveur
         static String ChaineTableauClient1;
         static String ChaineTableauClient2;
 
+        static int NombrePointClient1 = 0;
+        static int NombrePointClient2 = 0;
+
+        static int messageDeFinClient1 = 0;
+        static int messageDeFinClient2 = 0;
+
         static void Main(string[] args)
         {
             Console.Title = "Serveur BattleShip";
 
+            Console.Clear();
             EntrerUnPort();
 
             Console.WriteLine("Serveur en cours de démarrage!");
@@ -110,17 +117,35 @@ namespace Serveur
                 ThreadClient2.Start();
 
                 // Bouclé tant que les deux clients sont connectés
-                while (SocketClient1.Connected && SocketClient2.Connected)
+                while (SocketClient1.Connected && SocketClient2.Connected && !PartiEstFini())
                 {
                     // ew
                     Thread.Sleep(5);
                 }
+                /*string text = "";
+                byte[] data;
+
+                text = "L'ennemi a touche un bateau,";
+                
+                if(NombrePointClient1 >= 17)
+                {
+                    text += messageDeFinClient1.ToString(); 
+                }
+                else
+                {
+                    text += messageDeFinClient2.ToString(); 
+                }
+
+                data = Encoding.ASCII.GetBytes(text);
+
+                SocketClient1.Send(data);
+                SocketClient2.Send(data);*/
                 // Si l'un des deux clients ce déconnecte, fermer tout!
                 ThreadClient1.Abort();
                 ThreadClient2.Abort();
-                SocketServeur.Close();
+                /*SocketServeur.Close();
                 SocketClient1.Close();
-                SocketClient2.Close();
+                SocketClient2.Close();*/
             }
             catch(SocketException)
             {
@@ -133,7 +158,7 @@ namespace Serveur
         {
             try
             {
-                while (SocketClient1 != null && SocketClient1.Connected)
+                while (SocketClient1 != null && SocketClient1.Connected && !PartiEstFini())
                 {
 
                     Buffer1 = new byte[SocketClient1.SendBufferSize];
@@ -171,9 +196,12 @@ namespace Serveur
                             text2 = "L'ennemi a touche un bateau," + Index.ToString();
                             data2 = Encoding.ASCII.GetBytes(text2);
 
+                            messageDeFinClient1 = Index;
+
                             SocketClient1.Send(data);
                             SocketClient2.Send(data2);
-                            Console.WriteLine("Bateau ennemi touché!," + Index.ToString());
+                            Console.WriteLine("Bateau ennemi touché!," + NombrePointClient1.ToString());
+                            NombrePointClient1++;
                         }
                         else
                         {
@@ -201,7 +229,7 @@ namespace Serveur
         {
             try
             {
-                while (SocketClient2 != null && SocketClient2.Connected)
+                while (SocketClient2 != null && SocketClient2.Connected && !PartiEstFini())
                 {
                     Buffer2 = new byte[SocketClient2.SendBufferSize];
 
@@ -239,10 +267,11 @@ namespace Serveur
 
                             text2 = "L'ennemi a touche un bateau," + Index.ToString();
                             data2 = Encoding.ASCII.GetBytes(text2);
-
+                            
                             SocketClient2.Send(data);
                             SocketClient1.Send(data2);
-                            Console.WriteLine("Bateau ennemi touché!," + Index.ToString());
+                            Console.WriteLine("Bateau ennemi touché!," + NombrePointClient2.ToString());
+                            NombrePointClient2++;
                         }
                         else
                         {
@@ -251,6 +280,8 @@ namespace Serveur
 
                             text2 = "L'ennemi a manque son tir," + Index.ToString();
                             data2 = Encoding.ASCII.GetBytes(text2);
+
+                            messageDeFinClient2 = Index;
 
                             SocketClient2.Send(data);
                             SocketClient1.Send(data2);
@@ -263,6 +294,17 @@ namespace Serveur
             {
                 Console.WriteLine("Une erreur dans la fonction TraiterClient2.");
             }
+        }
+        private static bool PartiEstFini()
+        {
+            bool estFini = false;
+
+            if (NombrePointClient1 == 17)
+                estFini = true;
+            else if (NombrePointClient2 == 17)
+                estFini = true;
+                
+            return estFini;
         }
     }
 }

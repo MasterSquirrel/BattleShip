@@ -27,3 +27,9 @@ C:\Users\201345648\Desktop\BattleShip\BattleShip\BattleShip\Serveur\obj\Debug\Se
 C:\Users\201345648\Desktop\BattleShip\BattleShip\BattleShip\Serveur\bin\Debug\Serveur.exe
 C:\Users\201345648\Desktop\BattleShip\BattleShip\BattleShip\Serveur\bin\Debug\Serveur.pdb
 C:\Users\201345648\Desktop\BattleShip\BattleShip\BattleShip\Serveur\obj\Debug\Serveur.csprojResolveAssemblyReference.cache
+C:\Users\Andy\Documents\GitHub\BattleShip\BattleShip\BattleShip\Serveur\bin\Debug\Serveur.exe.config
+C:\Users\Andy\Documents\GitHub\BattleShip\BattleShip\BattleShip\Serveur\obj\Debug\Serveur.exe
+C:\Users\Andy\Documents\GitHub\BattleShip\BattleShip\BattleShip\Serveur\obj\Debug\Serveur.pdb
+C:\Users\Andy\Documents\GitHub\BattleShip\BattleShip\BattleShip\Serveur\bin\Debug\Serveur.exe
+C:\Users\Andy\Documents\GitHub\BattleShip\BattleShip\BattleShip\Serveur\bin\Debug\Serveur.pdb
+C:\Users\Andy\Documents\GitHub\BattleShip\BattleShip\BattleShip\Serveur\obj\Debug\Serveur.csprojResolveAssemblyReference.cache

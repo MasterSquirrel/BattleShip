@@ -48,6 +48,9 @@ namespace BattleShip
 
         int NombreTir = 0;
 
+        bool aJouerSonTour = false;
+        string tempData = "";
+
         // Liste des positions(Index) que l'autre joueur a attaqué!
         List<String> ListeIndex = new List<String>();
 
@@ -68,16 +71,16 @@ namespace BattleShip
             // Méthode bloquante pour ouvrir un form
             Placage.ShowDialog();
 
-            if(Placage.sck != null && SocketClient == null && Placage.connecterAuServeur == true)
+            if (Placage.sck != null && SocketClient == null && Placage.connecterAuServeur == true)
             {
                 SocketClient = Placage.sck;
                 ChaineTableau = Placage.SpotsBateaux;
-                Bateaux = new List<Bateau>(Placage.Bateaux);               
+                Bateaux = new List<Bateau>(Placage.Bateaux);
             }
-            
+
             if (SocketClient != null && SocketClient.Connected)
             {
-                
+
                 // Premier message que j'envoie au serveur c'est les positions de mes bateaux
                 string text = ChaineTableau;
                 byte[] data = Encoding.ASCII.GetBytes(text);
@@ -808,12 +811,12 @@ namespace BattleShip
                             if (Tableau.ElementAt(z).BackColor == Color.LightCyan)
                             {
                                 continuer = true;
-                            }                          
+                            }
                         }
 
                         z++;
                     }
-                    if(continuer)
+                    if (continuer)
                     {
                         bool BateauEnnemiTouche = false;
                         // Les position reçus sont de 0 à 9
@@ -826,45 +829,54 @@ namespace BattleShip
                             PosVerticale++;
                         }
 
-                        // Demander si on execute le move
-                        DialogResult Executer = MessageBox.Show("Vous avez choisi la postion (" + PositionQuonDitQueCestLaEnX +
-                            ", " + PosVerticale + "). Voulez-vous lancer une torpille?",
-                            "Executer l'attaque?", MessageBoxButtons.YesNo);
-
-                        if (Executer == DialogResult.Yes)
+                        string strData3 = "";
+                        String Index = "";
+                        if (SocketClient.Connected)
                         {
+                            // Vérifier si l'ennemi a attaquer 
+                            byte[] Buffer3 = new byte[SocketClient.SendBufferSize];
 
-                            string strData3 = "";
-                            String Index = "";
-                            if (SocketClient.Connected)
+                            SocketClient.ReceiveTimeout = 10;
+                            try
                             {
-                                // Vérifier si l'ennemi a attaquer 
-                                byte[] Buffer3 = new byte[SocketClient.SendBufferSize];
+                                int bytesRead3 = SocketClient.Receive(Buffer3);
 
-                                SocketClient.ReceiveTimeout = 10;
-                                try
+                                byte[] formatted3 = new byte[bytesRead3];
+                                for (int a = 0; a < bytesRead3; a++)
                                 {
-                                    int bytesRead3 = SocketClient.Receive(Buffer3);
-
-                                    byte[] formatted3 = new byte[bytesRead3];
-                                    for (int a = 0; a < bytesRead3; a++)
-                                    {
-                                        formatted3[a] = Buffer3[a];
-                                    }
-                                    strData3 = Encoding.ASCII.GetString(formatted3);
-                                    String[] chaines = strData3.Split(',');
+                                    formatted3[a] = Buffer3[a];
+                                }
+                                strData3 = Encoding.ASCII.GetString(formatted3);
+                                String[] chaines = strData3.Split(',');
+                                if (strData3 != "")
+                                {
                                     strData3 = chaines[0];
                                     ListeIndex.Add(chaines[1]);
                                 }
-                                catch (SocketException se)
-                                {
+                            }
+                            catch (SocketException se)
+                            {
 
-                                }
-                                try
-                                {
+                            }
+                            try
+                            {
 
-                                    if (strData3 == "L'ennemi a touche un bateau" || strData3 == "L'ennemi a manque son tir" || NombreTir == 0/*C'est pour jouer le premier tour*/)
+                                if ((strData3 != "" && (strData3 == "L'ennemi a touche un bateau" || strData3 == "L'ennemi a manque son tir" || NombreTir == 0/*C'est pour jouer le premier tour*/)) || NombreTir == 0 || !aJouerSonTour)
+                                {
+                                    aJouerSonTour = false;
+                                    // Garder en mémoire le teste envoyer par le serveur (C'est une sécuriter)
+                                    if (strData3 != "")
+                                        tempData = strData3;
+
+                                    // Demander si on execute le move
+                                    DialogResult Executer = MessageBox.Show("Vous avez choisi la postion (" + PositionQuonDitQueCestLaEnX +
+                                        ", " + PosVerticale + "). Voulez-vous lancer une torpille?",
+                                        "Executer l'attaque?", MessageBoxButtons.YesNo);
+
+                                    if (Executer == DialogResult.Yes)
                                     {
+                                        strData3 = tempData;
+
                                         RTB_Messages.AppendText(strData3 + "\n");
 
                                         if (RTB_Messages.Visible)
@@ -956,26 +968,27 @@ namespace BattleShip
 
                                             i++;
                                         }
-                                    }
-                                    else
-                                    {
-                                        RTB_Messages.AppendText("En attente du tour de l'autre joueur! \n");
-                                        if (RTB_Messages.Visible)
-                                        {
-                                            RTB_Messages.SelectionStart = RTB_Messages.TextLength;
-                                            RTB_Messages.ScrollToCaret();
-                                        }
+                                        aJouerSonTour = true;
                                     }
                                 }
-                                catch (SocketException se)
+                                else
                                 {
-
+                                    RTB_Messages.AppendText("En attente du tour de l'autre joueur! \n");
+                                    if (RTB_Messages.Visible)
+                                    {
+                                        RTB_Messages.SelectionStart = RTB_Messages.TextLength;
+                                        RTB_Messages.ScrollToCaret();
+                                    }
                                 }
+                            }
+                            catch (SocketException se)
+                            {
 
                             }
 
-                            CompterNombreBateauTouche();
                         }
+
+                        CompterNombreBateauTouche();
 
                         // Sinon on fait rien
 
@@ -1013,7 +1026,7 @@ namespace BattleShip
                 }
                 i++;
             }
-         
+
             // Update le label qui indique le nombre de bateau ennemi touché
             LBL_BateauxEnnemisTouches.Text = NombreBateauEnnemiTouche.ToString();
         }
@@ -1028,26 +1041,26 @@ namespace BattleShip
                 MessageBox.Show("Vous avez gagné!");
                 estFini = true;
             }
-            else if(LBL_MesBateauxTouches.Text == "17")
+            else if (LBL_MesBateauxTouches.Text == "17")
             {
                 MessageBox.Show("Vous avez perdu!");
                 estFini = true;
             }
-                
+
             return estFini;
         }
 
         private void BTN_AfficherMesBateaux_Click(object sender, EventArgs e)
         {
-            if(Bateaux != null)
+            if (Bateaux != null)
             {
-                NosBateaux form = new NosBateaux(Bateaux,ListeIndex);
+                NosBateaux form = new NosBateaux(Bateaux, ListeIndex);
                 form.ShowDialog();
             }
             else
             {
                 MessageBox.Show("Démarrer une partie!");
             }
-        }   
+        }
     }
 }
