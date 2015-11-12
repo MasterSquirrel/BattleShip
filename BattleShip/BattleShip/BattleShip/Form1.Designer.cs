@@ -163,6 +163,8 @@
             this.label27 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.BTN_AfficherMesBateaux = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.GB_Viseur.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox91)).BeginInit();
@@ -1593,6 +1595,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label23);
+            this.groupBox1.Controls.Add(this.label21);
             this.groupBox1.Controls.Add(this.BTN_AfficherMesBateaux);
             this.groupBox1.Controls.Add(this.label27);
             this.groupBox1.Controls.Add(this.LBL_BateauxEnnemisTouches);
@@ -1607,13 +1611,31 @@
             // 
             // BTN_AfficherMesBateaux
             // 
-            this.BTN_AfficherMesBateaux.Location = new System.Drawing.Point(104, 16);
+            this.BTN_AfficherMesBateaux.Location = new System.Drawing.Point(154, 12);
             this.BTN_AfficherMesBateaux.Name = "BTN_AfficherMesBateaux";
             this.BTN_AfficherMesBateaux.Size = new System.Drawing.Size(57, 20);
             this.BTN_AfficherMesBateaux.TabIndex = 5;
             this.BTN_AfficherMesBateaux.Text = "Afficher";
             this.BTN_AfficherMesBateaux.UseVisualStyleBackColor = true;
             this.BTN_AfficherMesBateaux.Click += new System.EventHandler(this.BTN_AfficherMesBateaux_Click);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(101, 16);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(27, 13);
+            this.label21.TabIndex = 6;
+            this.label21.Text = "/ 17";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(423, 16);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(27, 13);
+            this.label23.TabIndex = 7;
+            this.label23.Text = "/ 17";
             // 
             // Form1
             // 
@@ -1878,6 +1900,8 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button BTN_AfficherMesBateaux;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label21;
     }
 }
 

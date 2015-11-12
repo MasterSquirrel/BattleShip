@@ -74,8 +74,6 @@ namespace BattleShip
                 ChaineTableau = Placage.SpotsBateaux;
                 Bateaux = new List<Bateau>(Placage.Bateaux);               
             }
-                
-
             
             if (SocketClient != null && SocketClient.Connected)
             {
@@ -868,6 +866,13 @@ namespace BattleShip
                                     if (strData3 == "L'ennemi a touche un bateau" || strData3 == "L'ennemi a manque son tir" || NombreTir == 0/*C'est pour jouer le premier tour*/)
                                     {
                                         RTB_Messages.AppendText(strData3 + "\n");
+
+                                        if (RTB_Messages.Visible)
+                                        {
+                                            RTB_Messages.SelectionStart = RTB_Messages.TextLength;
+                                            RTB_Messages.ScrollToCaret();
+                                        }
+
                                         if (strData3 == "L'ennemi a touche un bateau")
                                             LBL_MesBateauxTouches.Text = (Int32.Parse(LBL_MesBateauxTouches.Text) + 1).ToString();
 
@@ -898,11 +903,21 @@ namespace BattleShip
                                             if (strData2 == "Toucher")
                                             {
                                                 BateauEnnemiTouche = true;
-                                                RTB_Messages.AppendText("Bateau ennemi touché! \n");
+                                                RTB_Messages.AppendText("Touché! \n");
+                                                if (RTB_Messages.Visible)
+                                                {
+                                                    RTB_Messages.SelectionStart = RTB_Messages.TextLength;
+                                                    RTB_Messages.ScrollToCaret();
+                                                }
                                             }
                                             else
                                             {
-                                                RTB_Messages.AppendText("Manqué! \n");
+                                                RTB_Messages.AppendText("À l'eau! \n");
+                                                if (RTB_Messages.Visible)
+                                                {
+                                                    RTB_Messages.SelectionStart = RTB_Messages.TextLength;
+                                                    RTB_Messages.ScrollToCaret();
+                                                }
                                             }
                                         }
                                         catch (SocketException se)
@@ -936,7 +951,7 @@ namespace BattleShip
                                                     ChaineTableau.Insert(i, "o");
                                                 }
 
-                                                RTB_Messages.AppendText("Vous avez attaqué la position (" + PositionQuonDitQueCestLaEnX + ", " + PosVerticale + ")." + "\n");
+                                                //RTB_Messages.AppendText("Vous avez attaqué la position (" + PositionQuonDitQueCestLaEnX + ", " + PosVerticale + ")." + "\n");
                                             }
 
                                             i++;
@@ -945,6 +960,11 @@ namespace BattleShip
                                     else
                                     {
                                         RTB_Messages.AppendText("En attente du tour de l'autre joueur! \n");
+                                        if (RTB_Messages.Visible)
+                                        {
+                                            RTB_Messages.SelectionStart = RTB_Messages.TextLength;
+                                            RTB_Messages.ScrollToCaret();
+                                        }
                                     }
                                 }
                                 catch (SocketException se)

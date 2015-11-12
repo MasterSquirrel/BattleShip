@@ -44,12 +44,10 @@
             this.CB_RotationVerticale = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.GB_OptionsReseau = new System.Windows.Forms.GroupBox();
-            this.BTN_Tester = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.NUD_Port = new System.Windows.Forms.NumericUpDown();
             this.TB_AdresseIP = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.LBL_Infos = new System.Windows.Forms.Label();
             this.BTN_Debuter = new System.Windows.Forms.Button();
             this.DGV_Grille = new System.Windows.Forms.DataGridView();
             this.GB_Bateaux.SuspendLayout();
@@ -256,28 +254,16 @@
             // 
             // GB_OptionsReseau
             // 
-            this.GB_OptionsReseau.Controls.Add(this.BTN_Tester);
             this.GB_OptionsReseau.Controls.Add(this.label6);
             this.GB_OptionsReseau.Controls.Add(this.NUD_Port);
             this.GB_OptionsReseau.Controls.Add(this.TB_AdresseIP);
             this.GB_OptionsReseau.Controls.Add(this.label5);
             this.GB_OptionsReseau.Location = new System.Drawing.Point(16, 393);
             this.GB_OptionsReseau.Name = "GB_OptionsReseau";
-            this.GB_OptionsReseau.Size = new System.Drawing.Size(599, 85);
+            this.GB_OptionsReseau.Size = new System.Drawing.Size(599, 90);
             this.GB_OptionsReseau.TabIndex = 5;
             this.GB_OptionsReseau.TabStop = false;
             this.GB_OptionsReseau.Text = "Options réseau pour la partie";
-            // 
-            // BTN_Tester
-            // 
-            this.BTN_Tester.Enabled = false;
-            this.BTN_Tester.Location = new System.Drawing.Point(459, 48);
-            this.BTN_Tester.Name = "BTN_Tester";
-            this.BTN_Tester.Size = new System.Drawing.Size(75, 23);
-            this.BTN_Tester.TabIndex = 4;
-            this.BTN_Tester.Text = "Tester";
-            this.BTN_Tester.UseVisualStyleBackColor = true;
-            this.BTN_Tester.Click += new System.EventHandler(this.BTN_Tester_Click);
             // 
             // label6
             // 
@@ -330,22 +316,11 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Adresse IP du serveur:";
             // 
-            // LBL_Infos
-            // 
-            this.LBL_Infos.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.LBL_Infos.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LBL_Infos.ForeColor = System.Drawing.Color.Red;
-            this.LBL_Infos.Location = new System.Drawing.Point(16, 485);
-            this.LBL_Infos.Name = "LBL_Infos";
-            this.LBL_Infos.Size = new System.Drawing.Size(453, 41);
-            this.LBL_Infos.TabIndex = 6;
-            this.LBL_Infos.Text = "ERREURS";
-            // 
             // BTN_Debuter
             // 
-            this.BTN_Debuter.Location = new System.Drawing.Point(475, 485);
+            this.BTN_Debuter.Location = new System.Drawing.Point(469, 441);
             this.BTN_Debuter.Name = "BTN_Debuter";
-            this.BTN_Debuter.Size = new System.Drawing.Size(140, 41);
+            this.BTN_Debuter.Size = new System.Drawing.Size(120, 31);
             this.BTN_Debuter.TabIndex = 7;
             this.BTN_Debuter.Text = "Débuter la partie!";
             this.BTN_Debuter.UseVisualStyleBackColor = true;
@@ -376,9 +351,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 535);
+            this.ClientSize = new System.Drawing.Size(627, 493);
             this.Controls.Add(this.BTN_Debuter);
-            this.Controls.Add(this.LBL_Infos);
             this.Controls.Add(this.GB_OptionsReseau);
             this.Controls.Add(this.GB_Rotation);
             this.Controls.Add(this.GB_Position);
@@ -425,12 +399,10 @@
         private System.Windows.Forms.CheckBox CB_RotationVerticale;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox GB_OptionsReseau;
-        private System.Windows.Forms.Button BTN_Tester;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown NUD_Port;
         private System.Windows.Forms.TextBox TB_AdresseIP;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label LBL_Infos;
         private System.Windows.Forms.Button BTN_Debuter;
         private System.Windows.Forms.DataGridView DGV_Grille;
     }
